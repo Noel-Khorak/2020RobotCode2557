@@ -18,6 +18,9 @@ public class PIDArm extends PIDCommand {
   /**
    * Creates a new PIDArm.
    */
+
+   double setpoint;
+   double deadBand;
   public PIDArm(ArmSubsystem subsystem, double setpoint, double deadBand) {
     super(
         // The controller that the command will use
@@ -33,6 +36,8 @@ public class PIDArm extends PIDCommand {
         });
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
+    this.setpoint = setpoint;
+    this.deadBand = deadBand;
     
     // Configure additional PID options by calling `getController` here.
   }
