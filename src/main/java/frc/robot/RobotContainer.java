@@ -12,9 +12,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.PIDArm;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -26,11 +29,14 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static final DriveSub driveSub = new DriveSub();
+  public static final ArmSubsystem armSub = new ArmSubsystem();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  public static final DriveCommand driveCommand = new DriveCommand(driveSub);
+  // public static final DriveCommand driveCommand = new DriveCommand(driveSub);
+  // public static final PIDArm armCommand = new PIDArm(armSub, 1000, 250);
 
   public static final Joystick stick = new Joystick(0);
+  public static final JoystickButton a1 = new JoystickButton(stick, 1);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -51,6 +57,8 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+    RobotContainer.a1.whileHeld(new PIDArm(armSub, 1000, 250));
     
 
   }

@@ -18,14 +18,14 @@ public class PIDArm extends PIDCommand {
   /**
    * Creates a new PIDArm.
    */
-  public PIDArm(ArmSubsystem subsystem) {
+  public PIDArm(ArmSubsystem subsystem, double setpoint, double deadBand) {
     super(
         // The controller that the command will use
         new PIDController(1.1, 0, 0),
         // This should return the measurement
         () -> ArmSubsystem.arm1.getSensorCollection().getQuadraturePosition(),
         // This should return the setpoint (can also be a constant)
-        () -> 100,
+        () -> 1000,
         // This uses the output
         output -> {
           // Use the output here
@@ -40,6 +40,10 @@ public class PIDArm extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (Math.abs(ArmSubsystem.arm1.getSensorCollection().getQuadraturePosition() - setpoint) > deadBand) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
