@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -27,6 +28,7 @@ public class RobotContainer {
   public static final DriveSub driveSub = new DriveSub();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  public static final DriveCommand driveCommand = new DriveCommand(driveSub);
 
   public static final Joystick stick = new Joystick(0);
 
