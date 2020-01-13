@@ -7,14 +7,23 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class TurretSub extends SubsystemBase {
-  /**
+
+  public static WPI_TalonSRX turretMotor = new WPI_TalonSRX(1);
+
+  /*
    * Creates a new TurretSub.
    */
   public TurretSub() {
 
+  }
+
+  public static void rotate(double speed){
+    turretMotor.set(speed);
   }
 
   @Override

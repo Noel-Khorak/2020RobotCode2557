@@ -7,11 +7,8 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.subsystems.SpinMotor;
 
 
@@ -45,8 +42,8 @@ public class PID extends CommandBase {
  @Override
  public void execute() {  
    
-   double output = pidController.calculate(measurementSource, setpoint);
-
+  double output = pidController.calculate(measurementSource, setpoint);
+  SpinMotor.spin(output);
  }
 
 
