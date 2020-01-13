@@ -7,24 +7,14 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ArmSubsystem extends SubsystemBase {
-
-  public static final WPI_TalonSRX arm1 = new WPI_TalonSRX(7);
-  public static final WPI_TalonSRX arm2 = new WPI_TalonSRX(8);
+public class TurretSub extends SubsystemBase {
   /**
-   * Creates a new ArmSubsystem.
+   * Creates a new TurretSub.
    */
-  public ArmSubsystem() {
+  public TurretSub() {
 
-  }
-
-  public static void moveArm(double spd) {
-    arm1.set(spd);
-    arm2.set(-spd);
   }
 
   @Override

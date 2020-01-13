@@ -11,12 +11,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.PIDArm;
-import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSub;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.SpinMotor;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -27,11 +25,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static final DriveSub driveSub = new DriveSub();
-  public static final ArmSubsystem armSub = new ArmSubsystem();
+  public static final SpinMotor spinSub = new SpinMotor();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   // public static final DriveCommand driveCommand = new DriveCommand(driveSub);
   // public static final PIDArm armCommand = new PIDArm(armSub, 1000, 250);
 
@@ -42,6 +38,9 @@ public class RobotContainer {
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+
+    spinSub.setDefaultCommand(new RunCommand(() -> SpinMotor.spin(1), spinSub));
+
     // Configure the button bindings
 
     configureButtonBindings();
@@ -58,7 +57,6 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    RobotContainer.a1.whileHeld(new PIDArm(armSub, 1000, 250));
     
 
   }
@@ -71,6 +69,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null;
   }
 }
