@@ -22,13 +22,16 @@ public class PIDHood extends CommandBase {
   private final double hoodHeight = 2;
   private final double gravity = -32.2;
 
+  // private double d = 1;
+  // private double a = 8.1875 - hoodHeight;
+  // private double q = (2 * gravity * a);
   
 
 
   /**
    * Creates a new PIDHood.
    */
-  public PIDHood(HoodSub subsystem) {
+  public PIDHood(final HoodSub subsystem) {
     // Use addRequirements () here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -36,15 +39,21 @@ public class PIDHood extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    pidController = new PIDController(multp, multi, multd);
-    pidController.disableContinuousInput(); // if subsystem is rotational, or has a minimum and maximum at the same points, should enableContinuousInput();
+    pidController = new PIDController(kP, kI, kD);
+    pidController.disableContinuousInput(); // if subsystem is rotational, or has a minimum and maximum at the same
+                                            // points, should enableContinuousInput();
     pidController.setTolerance(tolerance); // the deadband, or margin of error acceptable
     pidController.reset();
 
-    private double distance;
-    private final double a = 8.1875 - hoodHeight;
-    double vel = Math.sqrt((-(Math.pow(d, 2) * q)/Math.pow(a, 2) +  2 * (gravity*Math.pow(d, 2) / 2) / a - 4*gravity*a) / 2);
-    // private final double vel = Math.sqrt( (Math.sqrt( Math.pow(d, 2) * q *( Math.pow(d, 2) * q - 4 * a * r) ) / (Math.pow(a,2) - Math.pow(d, 2) * q)) - ( Math.pow(d, 2) * q) / (Math.pow(a, 2)) + ((2 * r) / (a)) - 2 * q) / Math.sqrt(2);
+    double d = 1;
+    final double a = 8.1875 - hoodHeight;
+    final double q = (2 * gravity * a);
+
+    final double vel = Math.sqrt((-(Math.pow(d, 2) * q) / Math.pow(a, 2) + 2 * (gravity * Math.pow(d, 2) / 2) / a - 4 * gravity * a) / 2);
+    // private final double vel = Math.sqrt( (Math.sqrt( Math.pow(d, 2) * q *(
+    // Math.pow(d, 2) * q - 4 * a * r) ) / (Math.pow(a,2) - Math.pow(d, 2) * q)) - (
+    // Math.pow(d, 2) * q) / (Math.pow(a, 2)) + ((2 * r) / (a)) - 2 * q) /
+    // Math.sqrt(2);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -54,7 +63,7 @@ public class PIDHood extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
+  public void end(final boolean interrupted) {
   }
 
   // Returns true when the command should end.
