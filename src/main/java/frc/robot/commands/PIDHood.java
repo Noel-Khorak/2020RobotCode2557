@@ -45,11 +45,7 @@ public class PIDHood extends CommandBase {
     pidController.setTolerance(tolerance); // the deadband, or margin of error acceptable
     pidController.reset();
 
-    double d = 1;
-    final double a = 8.1875 - hoodHeight;
-    final double q = (2 * gravity * a);
-
-    final double vel = Math.sqrt((-(Math.pow(d, 2) * q) / Math.pow(a, 2) + 2 * (gravity * Math.pow(d, 2) / 2) / a - 4 * gravity * a) / 2);
+    
     // private final double vel = Math.sqrt( (Math.sqrt( Math.pow(d, 2) * q *(
     // Math.pow(d, 2) * q - 4 * a * r) ) / (Math.pow(a,2) - Math.pow(d, 2) * q)) - (
     // Math.pow(d, 2) * q) / (Math.pow(a, 2)) + ((2 * r) / (a)) - 2 * q) /
@@ -58,7 +54,14 @@ public class PIDHood extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
+  public void execute() { 
+    double d = 1; //get dist
+    double a = 8.1875 - hoodHeight; //const
+    double q = (2 * gravity * a); //const
+
+    double vel = Math.sqrt((-(Math.pow(d, 2) * q) / Math.pow(a, 2) + 2 * (gravity * Math.pow(d, 2) / 2) / a - 4 * gravity * a) / 2);
+    double alpha = Math.asin(Math.sqrt(-q/Math.pow(vel, 2)));
+
   }
 
   // Called once the command ends or is interrupted.
