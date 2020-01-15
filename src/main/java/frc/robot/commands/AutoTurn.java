@@ -8,12 +8,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSub;
 
-public class DriveCommand extends CommandBase {
+public class AutoTurn extends CommandBase {
 
-  public DriveCommand(DriveSub subsystem) {
+  
+  double angle;
+  /**
+   * Creates a new AutoTurn.
+   */
+  public AutoTurn(double angle, DriveSub subsystem) {
+    this.angle = angle;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -21,29 +28,33 @@ public class DriveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Constants.navX.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    RobotContainer.driveSub.drive(RobotContainer.stick.getRawAxis(1), RobotContainer.stick.getRawAxis(4));
-
-    if (RobotContainer.driveSub.getCurrentGear() == 1 && RobotContainer.driveSub.getRotationSpeed(RobotContainer.driveSub.getCurrentGear()) > RobotContainer.driveSub.limitRotSpdGear1) {
-      RobotContainer.driveSub.shift();
-    } else if (RobotContainer.driveSub.getCurrentGear() == 2 && RobotContainer.driveSub.getRotationSpeed(RobotContainer.driveSub.getCurrentGear()) < RobotContainer.driveSub.limitRotSpdGear1){
-      RobotContainer.driveSub.shift();
+    if (angle > 0) {
+      RobotContainer.driveSub.drive(0, 0.2);
+    } else if(angle < 0) {
+      RobotContainer.driveSub.drive(0, -0.2);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    RobotContainer.driveSub.drive(0, 0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (Constants.navX.getAngle() >= angle && angle > 0) {
+      return true;
+    } else if(Constants.navX.getAngle() <= angle && angle < 0) {
+      return true;
+    }
     return false;
   }
 }

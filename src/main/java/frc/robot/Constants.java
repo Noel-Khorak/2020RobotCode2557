@@ -8,6 +8,9 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.SPI;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -18,5 +21,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static final WPI_TalonSRX motor1 = new WPI_TalonSRX(0);
+    public static final WPI_TalonSRX motor1 = new WPI_TalonSRX(69);
+    public static AHRS navX = new AHRS(SPI.Port.kMXP);
 }

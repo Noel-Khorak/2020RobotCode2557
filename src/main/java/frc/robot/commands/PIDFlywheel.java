@@ -7,15 +7,30 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.DriveSub;
+import frc.robot.subsystems.HoodSub;
 
-public class DriveCommand extends CommandBase {
+public class PIDFlywheel extends CommandBase {
+  
+  private static PIDController pidController;
+  private static final double kP = 0;
+  private static final double kI = 0;
+  private static final double kD = 0;
+  private static final double tolerance = 1;
+  public double setpoint;
+  private double output;
 
-  public DriveCommand(DriveSub subsystem) {
+  /**
+   * Creates a new PIDFlywheel.
+   */
+  public PIDFlywheel(double setpoint) {
+    this.setpoint = setpoint;
+    pidController = new PIDController(kP, kI, kD);
+    pidController.reset();
+    pidController.disableContinuousInput();
+    pidController.setTolerance(tolerance);
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -26,14 +41,8 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    output = pidController.calculate(HoodSub.getFlywheelSpeed(), setpoint);
     
-    RobotContainer.driveSub.drive(RobotContainer.stick.getRawAxis(1), RobotContainer.stick.getRawAxis(4));
-
-    if (RobotContainer.driveSub.getCurrentGear() == 1 && RobotContainer.driveSub.getRotationSpeed(RobotContainer.driveSub.getCurrentGear()) > RobotContainer.driveSub.limitRotSpdGear1) {
-      RobotContainer.driveSub.shift();
-    } else if (RobotContainer.driveSub.getCurrentGear() == 2 && RobotContainer.driveSub.getRotationSpeed(RobotContainer.driveSub.getCurrentGear()) < RobotContainer.driveSub.limitRotSpdGear1){
-      RobotContainer.driveSub.shift();
-    }
   }
 
   // Called once the command ends or is interrupted.
@@ -44,6 +53,6 @@ public class DriveCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return pidController.atSetpoint();
   }
 }

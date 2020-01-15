@@ -11,9 +11,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSub;
 
-public class DriveCommand extends CommandBase {
+public class AutoDriveForward extends CommandBase {
 
-  public DriveCommand(DriveSub subsystem) {
+  double distance;
+  /**
+   * Creates a new AutoDriveForward.
+   */
+  public AutoDriveForward(double distance, DriveSub subsystem) {
+
+    this.distance = distance;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -21,29 +27,29 @@ public class DriveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    DriveSub.l1.getSensorCollection().setQuadraturePosition(0, 10);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    RobotContainer.driveSub.drive(RobotContainer.stick.getRawAxis(1), RobotContainer.stick.getRawAxis(4));
-
-    if (RobotContainer.driveSub.getCurrentGear() == 1 && RobotContainer.driveSub.getRotationSpeed(RobotContainer.driveSub.getCurrentGear()) > RobotContainer.driveSub.limitRotSpdGear1) {
-      RobotContainer.driveSub.shift();
-    } else if (RobotContainer.driveSub.getCurrentGear() == 2 && RobotContainer.driveSub.getRotationSpeed(RobotContainer.driveSub.getCurrentGear()) < RobotContainer.driveSub.limitRotSpdGear1){
-      RobotContainer.driveSub.shift();
-    }
+    RobotContainer.driveSub.drive(0.3, 0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    RobotContainer.driveSub.drive(0, 0);
+    System.out.println("dsdfds");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (DriveSub.l1.getSensorCollection().getQuadraturePosition() >= distance) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

@@ -14,10 +14,24 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class HoodSub extends SubsystemBase {
 
   public static WPI_TalonSRX hoodMotor = new WPI_TalonSRX(3);
+  public static WPI_TalonSRX flywheelMotor = new WPI_TalonSRX(5);
+  private static final double encTicksPerRot = 0;
+
   /**
    * Creates a new HoodSub.
    */
+
   public HoodSub() {
+
+  }
+
+  public static void spinFlywheel(double speed) {
+    flywheelMotor.set(speed);
+  }
+
+  // returns RPM of flywheel
+  public static double getFlywheelSpeed() {
+    return (flywheelMotor.getSensorCollection().getQuadratureVelocity() / encTicksPerRot) * 600;
 
   }
 
