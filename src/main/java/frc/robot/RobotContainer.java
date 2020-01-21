@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.SolenoidTest;
+import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ZigZagDrive;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.SpinMotor;
@@ -34,7 +34,7 @@ public class RobotContainer {
   // public static final PIDArm armCommand = new PIDArm(armSub, 1000, 250);
 
   public static final Joystick stick = new Joystick(0);
-  public static final JoystickButton a1 = new JoystickButton(stick, 1);
+  public static final JoystickButton dA = new JoystickButton(stick, 1);
   public static final JoystickButton b = new JoystickButton(stick, 3);
 
   /**
@@ -43,7 +43,8 @@ public class RobotContainer {
   public RobotContainer() {
 
     // spinSub.setDefaultCommand(new RunCommand(() -> SpinMotor.spin(1), spinSub));
-    driveSub.setDefaultCommand(new RunCommand(() -> driveSub.drive(stick.getRawAxis(0), -stick.getRawAxis(4)), driveSub));
+    driveSub.setDefaultCommand(new DriveCommand(driveSub));
+
 
     // Configure the button bindings
 
@@ -60,7 +61,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    b.whenPressed(new SolenoidTest());
+    dA.whenPressed(() -> driveSub.shift(), driveSub);
   }
 
 

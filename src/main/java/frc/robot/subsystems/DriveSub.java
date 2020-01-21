@@ -22,15 +22,19 @@ public class DriveSub extends SubsystemBase {
   public static final int gearWhenReverse = 2;
   public static final double ratioGear1 = 18.86;
   public static final double ratioGear2 = 6.45;
-  public static final double eTicksPerRev = 0;
-  public static final double limitRotSpdGear1 = 238; // rotations per minute
+  public static final double eTicksPerRev = 42;
 
-  public static final DoubleSolenoid dsL = new DoubleSolenoid(0, 1);
-  public static final DoubleSolenoid dsR = new DoubleSolenoid(0, 2);
-  public static final CANSparkMax l1 = new CANSparkMax(0, MotorType.kBrushless);
-  public static final CANSparkMax l2 = new CANSparkMax(1, MotorType.kBrushless);
-  public static final CANSparkMax r1 = new CANSparkMax(15, MotorType.kBrushless);
-  public static final CANSparkMax r2 = new CANSparkMax(14, MotorType.kBrushless);
+  public static final double wheelDiameter = 0.5; //in feet
+  public static final double limitFtPerSec = 6; //in feet per second
+  public static final double limitRotSpdGear1 = 
+    (limitFtPerSec / (wheelDiameter * Math.PI)) /* ft/s  /  ft/rot  = rot/s */   * 60; // rotations per minute
+
+  public static final DoubleSolenoid dsL = new DoubleSolenoid(1, 0, 1);
+  // public static final DoubleSolenoid dsR = new DoubleSolenoid(0, 2);
+  public static final CANSparkMax l1 = new CANSparkMax(10, MotorType.kBrushless);
+  public static final CANSparkMax l2 = new CANSparkMax(11, MotorType.kBrushless);
+  public static final CANSparkMax r1 = new CANSparkMax(12, MotorType.kBrushless);
+  public static final CANSparkMax r2 = new CANSparkMax(13, MotorType.kBrushless);
   public static final SpeedControllerGroup l = new SpeedControllerGroup(l1, l2);
   public static final SpeedControllerGroup r = new SpeedControllerGroup(r1, r2);
   public static final DifferentialDrive driveTrain = new DifferentialDrive(l, r);
@@ -48,12 +52,14 @@ public class DriveSub extends SubsystemBase {
   }
 
   public void shift() {
+
+    System.out.println(dsL.get());
     if (dsL.get() == Value.kForward) {
       dsL.set(Value.kReverse);
-      dsR.set(Value.kForward);
+      // dsR.set(Value.kForward);
     } else if(dsL.get() == Value.kReverse) {
       dsL.set(Value.kForward);
-      dsR.set(Value.kForward);
+      // dsR.set(Value.kForward);
     }
     
   }
@@ -61,20 +67,19 @@ public class DriveSub extends SubsystemBase {
   public int getCurrentGear() {
     if (dsL.get() == Value.kForward) {
       return gearWhenForward;
-    } else if(dsL.get() == Value.kReverse) {
+    } else {
       return gearWhenReverse;
     }
-    return 0;
   }
 
   // returns rotation speed of wheel in rotations per minute
-  public double getRotationSpeed (double currentGear) {
+  public double getRotationSpeed(double currentGear) {
     if (currentGear == 1) {
-      return (encoder.getVelocity()/eTicksPerRev) / ratioGear1;
-    } else if (currentGear == 2) {
-      return (encoder.getVelocity()/eTicksPerRev) / ratioGear2;
+      return encoder.getVelocity() / (ratioGear1);
+    } else{
+      return encoder.getVelocity() / (ratioGear2) ;
     }
-    return 0;
+
   }
 
   @Override

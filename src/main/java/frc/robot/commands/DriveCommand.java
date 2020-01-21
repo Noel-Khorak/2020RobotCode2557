@@ -27,11 +27,11 @@ public class DriveCommand extends CommandBase {
   @Override
   public void execute() {
     
-    RobotContainer.driveSub.drive(RobotContainer.stick.getRawAxis(1), RobotContainer.stick.getRawAxis(4));
+    RobotContainer.driveSub.drive(RobotContainer.stick.getRawAxis(1), 0.6 * RobotContainer.stick.getRawAxis(4));
 
-    if (RobotContainer.driveSub.getCurrentGear() == 1 && RobotContainer.driveSub.getRotationSpeed(RobotContainer.driveSub.getCurrentGear()) > RobotContainer.driveSub.limitRotSpdGear1) {
+    if (RobotContainer.driveSub.getCurrentGear() == 1 && Math.abs(RobotContainer.driveSub.getRotationSpeed(RobotContainer.driveSub.getCurrentGear())) > DriveSub.limitRotSpdGear1) {
       RobotContainer.driveSub.shift();
-    } else if (RobotContainer.driveSub.getCurrentGear() == 2 && RobotContainer.driveSub.getRotationSpeed(RobotContainer.driveSub.getCurrentGear()) < RobotContainer.driveSub.limitRotSpdGear1){
+    } else if (RobotContainer.driveSub.getCurrentGear() == 2 && Math.abs(RobotContainer.driveSub.getRotationSpeed(RobotContainer.driveSub.getCurrentGear())) < DriveSub.limitRotSpdGear1) {
       RobotContainer.driveSub.shift();
     }
   }

@@ -8,13 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveSub;
 
-public class AutoDriveForward extends CommandBase {
+public class ColorWheelCommand extends CommandBase {
   /**
-   * Creates a new AutoDriveForward.
+   * Creates a new ColorWheelCommand.
    */
-  public AutoDriveForward(double setpoint, DriveSub sub) {
+  public ColorWheelCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
