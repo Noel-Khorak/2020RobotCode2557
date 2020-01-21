@@ -28,7 +28,7 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    DriveSubsystem.driveBase(Constants.joystick.getRawAxis(1), Conmstants.joystick.getRawAxis(4));
+    DriveSubsystem.driveBase(Constants.joystick.getRawAxis(1), Constants.joystick.getRawAxis(4));
 
   }
 
