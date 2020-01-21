@@ -33,6 +33,7 @@ public class RobotContainer {
 
   public static Joystick jStick = new Joystick(0);
 
+  }
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -43,6 +44,8 @@ public class RobotContainer {
     m_robotDrive.setDefaultCommand(
       new RunCommand(() -> DriveSubsystem.driveBase(jStick.getRawAxis(1), -jStick.getRawAxis(0)), m_robotDrive));
     
+        }
+    }
       
   }
 

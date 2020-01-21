@@ -96,6 +96,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    double left = Constants.joystick.getRawAxis(0);
+    double right = Constants.joystick.getRawAxis(4);
+
+    drive.driveBase(left, right);
+
   }
 
   @Override

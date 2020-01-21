@@ -23,8 +23,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   }
   
-  public static void driveBase(double speed, double rotation){
-    Constants.diffDrive.arcadeDrive(speed, rotation);
+  public static void driveBase(double left, double right){
+    Constants.diffDrive.tankDrive(left, right);
   }
 
   public static void shiftGear() {

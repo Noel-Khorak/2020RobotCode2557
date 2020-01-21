@@ -26,18 +26,34 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+    public static WPI_TalonSRX basicMotor;
+        
+    public static WPI_TalonSRX frontLeft;
+    public static WPI_TalonSRX frontRight;
+    public static WPI_TalonSRX backLeft;
+    public static WPI_TalonSRX backRight;
     
+    public static speedControllerGroup left;
+    public static speedControllerGroup right;
     
-    public static final WPI_TalonSRX frontL = new WPI_TalonSRX(1);
-    public static final WPI_TalonSRX frontR = new WPI_TalonSRX(3);
-    public static final WPI_TalonSRX backL = new WPI_TalonSRX(0);
-    public static final WPI_TalonSRX backR = new WPI_TalonSRX(2);
-    public static final DoubleSolenoid doubleSol = new DoubleSolenoid(1, 0);
-  
-    public static final SpeedControllerGroup left = new SpeedControllerGroup(frontL, backL);
-    public static final SpeedControllerGroup right = new SpeedControllerGroup(frontR, backR);
-    public static final DifferentialDrive diffDrive = new DifferentialDrive(left, right);
-  
+    public static DifferentialDrive drivetrain; 
+    
+    public static void init(){
+        
+        basicMotor = new WPI_TalonSRX(0);
+        
+        frontLeft = new WPI_TalonSRX(1);
+        frontRight = new WPI_TalonSRX(3);
+        backLeft = new WPI_TalonSRX(0);
+        backRight = new WPI_TalonSRX(2);
+        
+        left = new speedControllerGroup(frontLeft, backLeft);
+        right = new speedControllerGroup(frontRight, backRight);
+        drivetrain = new DifferentialDrive(left, right):
+
+        Joystick joystick = new Joystick(0);
+        
     // public static final AnalogInput enc = new AnalogInput(0);
     // public static final AnalogEncoder encode = new AnalogEncoder(enc);
 

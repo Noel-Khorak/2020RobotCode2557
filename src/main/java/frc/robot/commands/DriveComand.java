@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class DriveComand extends CommandBase {
+public class DriveCommand extends CommandBase {
   /**
-   * Creates a new DriveComand.
+   * Creates a new DriveCommand.
    */
-  public DriveComand(DriveSubsystem driveSub) {
+  public DriveCommand(DriveSubsystem driveSub) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveSub);
   }
@@ -28,18 +28,20 @@ public class DriveComand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    DriveSubsystem.driveBase(RobotContainer.jStick.getRawAxis(1), RobotContainer.jStick.getRawAxis(4));
+    DriveSubsystem.driveBase(Constants.joystick.getRawAxis(1), Conmstants.joystick.getRawAxis(4));
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    
     return false;
   }
 }
