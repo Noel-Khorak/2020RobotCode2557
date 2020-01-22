@@ -28,17 +28,29 @@ public final static Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429
 public final static Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
 public final static Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-Color colorSeen = l_colorSensor.getColor();
-Color colorSeen = r_colorSensor.getColor();
+public static Color l_sensorColor = l_colorSensor.getColor();
+public static Color r_sensorColor = r_colorSensor.getColor();
 
-ColorMatchResult colorResult = l_colorSensor.matchClosestColor(colorSeen);
-ColorMatchResult colorResult = r_colorSensor.matchClosestColor(colorSeen);
+public static ColorMatchResult l_colorResult = l_colorMatcher.matchClosestColor(l_sensorColor);
+public static ColorMatchResult r_colorResult = r_colorMatcher.matchClosestColor(r_sensorColor);
 
 public static AnalogInput ultraSonic = new AnalogInput();
 
-ColorMatcher.addColorMatch(<ColorTarget>);
+public Color l_sensorColor = l_colorSensor.getColor();
+public Color r_sensorColor = r_colorSensor.getColor();
 
-SmartDashboard.putNumber("Red", colorSeen.red);
+public static void init() {
+
+    l_colorMatch.addColorMatch(kRedTarget);
+    l_colorMatch.addColorMatch(kGreenTarget);
+    l_colorMatch.addColorMatch(kBlueTarget);
+    l_colorMatch.addColorMatch(kYellowTarget);
+    r_colorMatch.addColorMatch(kRedTarget);
+    r_colorMatch.addColorMatch(kGreenTarget);
+    r_colorMatch.addColorMatch(kBlueTarget);
+    r_colorMatch.addColorMatch(kYellowTarget);
+
+}
 
 if (ColorMatcher.color == kBlueTarget) {
     <StringName> = "Blue";
