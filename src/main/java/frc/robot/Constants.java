@@ -8,24 +8,50 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.AnalogEncoder;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-I2C.Port i2cPortRoboRio = I2C.Port.kOnboard;
-colorSensorV3 l_colorSensor = new ColorSensorV3(i2cPortRoboRio);
+private final I2C.Port i2cPortMXP = I2C.Port.kMXP;
+private final I2C.Port i2cPortRoboRio = I2C.Port.kOnboard;
 
-Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
-Color kRedTarget = ColorMatch.makeColor(0.429, 0.143, 0.143);
-Color kGreenTarget = ColorMatch.makeColor();
-Color kYellowTarget = ColorMatch.makeColor();
+public final ColorSensorV3 r_colorSensor = new ColorSensorV3(i2cPortMXP);
+public final ColorSensorV3 l_colorSensor = new ColorSensorV3(i2cPortRoboRio);
 
-Color colorSeen = l.colorSensor.getColor();
+public final static ColorMatch l_colorMatcher = new ColorMatch();
+public final static ColorMatch r_colorMatcher = new ColorMatch();
 
-ColorMatchResult <RandomName> = <SensorName>.matchClosestColor(WhatsBeingDetected);
+public final static Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
+public final static Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
+public final static Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
+public final static Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+
+Color colorSeen = l_colorSensor.getColor();
+Color colorSeen = r_colorSensor.getColor();
+
+ColorMatchResult colorResult = l_colorSensor.matchClosestColor(colorSeen);
+ColorMatchResult colorResult = r_colorSensor.matchClosestColor(colorSeen);
+
+public static AnalogInput ultraSonic = new AnalogInput();
+
+ColorMatcher.addColorMatch(<ColorTarget>);
+
+SmartDashboard.putNumber("Red", colorSeen.red);
+
+if (ColorMatcher.color == kBlueTarget) {
+    <StringName> = "Blue";
+  } else if (<ColorMatcher>.color == kRedTarget) {
+    <StringName> = "Red";
+  } else if (<ColorMatcher>.color == kGreenTarget) {
+    <StringName> = "Green";
+  } else if (<ColorMatcher>.color == kYellowTarget) {
+    <StringName> = "Yellow";
+  } else {
+    <StringName> = "Unknown";
+  }
+
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
