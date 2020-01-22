@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
+I2C.Port i2cPortRoboRio = I2C.Port.kOnboard;
+colorSensorV3 l_colorSensor = new ColorSensorV3(i2cPortRoboRio);
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -42,5 +45,6 @@ public final class Constants {
     Joystick joystick  = new Joystick(0); 
     // public static final AnalogInput enc = new AnalogInput(0);
     // public static final AnalogEncoder encode = new AnalogEncoder(enc);
-
+    
+    
 }
