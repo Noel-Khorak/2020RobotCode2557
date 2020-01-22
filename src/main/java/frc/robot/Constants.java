@@ -40,7 +40,6 @@ public final class Constants {
     public static DifferentialDrive drivetrain  = new DifferentialDrive(left, right):
 
     Joystick joystick  = new Joystick(0); 
-    
     // public static final AnalogInput enc = new AnalogInput(0);
     // public static final AnalogEncoder encode = new AnalogEncoder(enc);
 
