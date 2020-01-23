@@ -1,0 +1,26 @@
+
+//removes a single character 
+public class removeSingleChar{
+
+     public static void main(String []args){
+        String str = "ahjgajhfamjfajfaa";
+        System.out.println(charRemove(str, 0));
+     }
+     
+     public static String charRemove(String str, int p){
+         return str.substring(0, p) + str.substring(p + 1);
+         
+     }
+}
+
+
+
+//Removes all instances of a certain character 
+public class removeChar{
+   
+    public static void main(String []args){
+        String str = "Hello my name is Jacob,I am using a program that prints what I am saying but removes all instances of one character. Can guess what that character is? ";
+        str = str.replace("a","tire");
+        System.out.println(str);
+    }
+}
