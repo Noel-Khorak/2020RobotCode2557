@@ -35,7 +35,7 @@ public class RobotContainer {
   public static final AutoDriveTurn autoDriveTurn = new AutoDriveTurn(30, driveSub);
   public static final ZigZagDrive zigZagDrive = new ZigZagDrive();
 
-  public static final PIDCommand pidCommand = new PIDCommand(10000);
+  public static final PIDCommand pidCommand = new PIDCommand(-500);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -44,7 +44,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    driveSub.setDefaultCommand(new RunCommand(() -> driveSub.drive(stick.getRawAxis(1), stick.getRawAxis(5)), driveSub));
+    driveSub.setDefaultCommand(new RunCommand(() -> driveSub.drive(stick.getRawAxis(1), stick.getRawAxis(4)), driveSub));
 
   }
 

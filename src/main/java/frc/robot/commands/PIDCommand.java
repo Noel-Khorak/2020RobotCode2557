@@ -7,11 +7,10 @@
 
 package frc.robot.commands;
 
-import static frc.robot.subsystems.DriveSub.l2;
-
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.DriveSub;
 
 public class PIDCommand extends CommandBase {
   PIDController pidController;
@@ -27,9 +26,9 @@ public class PIDCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    pidController = new PIDController(0.3, 0, 0);
+    pidController = new PIDController(0.0003, 0, 0);
     pidController.disableContinuousInput();
-    pidController.setTolerance(10000);
+    pidController.setTolerance(50);
     pidController.reset();
   }
 
@@ -37,9 +36,9 @@ public class PIDCommand extends CommandBase {
   @Override
   public void execute() {
 
-    double output = pidController.calculate(l2.getSensorCollection().getQuadraturePosition(), driveSetpoint);
+    double output = pidController.calculate(DriveSub.l2.getSensorCollection().getQuadraturePosition(), driveSetpoint);
 
-    RobotContainer.driveSub.driveTrain.arcadeDrive(output, 0);
+    RobotContainer.driveSub.drive(-output, 0);
     // System.out.println("PID out put  " + -output + Constants.pidarmStall*Math.sin(enc));
 
     // System.out.println("ARM ENCODER" + Constants.armRight.getSensorCollection().getQuadraturePosition());
@@ -58,6 +57,7 @@ public class PIDCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    
     return pidController.atSetpoint();
   }
 }
