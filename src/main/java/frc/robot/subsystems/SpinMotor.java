@@ -7,10 +7,12 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
 public class SpinMotor extends SubsystemBase {
+  public static final WPI_TalonSRX motor1 = new WPI_TalonSRX(69);
   /**
    * Creates a new SpinMotor.
    */
@@ -19,7 +21,7 @@ public class SpinMotor extends SubsystemBase {
   }
 
   public static void spin(double speed){
-    Constants.motor1.set(speed);
+    motor1.set(speed);
   }
 
 

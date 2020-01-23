@@ -61,7 +61,6 @@ public class PIDHood extends CommandBase {
 
     double vel = Math.sqrt((-(Math.pow(d, 2) * q) / Math.pow(a, 2) + 2 * (gravity * Math.pow(d, 2) / 2) / a - 4 * gravity * a) / 2);
     double alpha = Math.asin(Math.sqrt(-q/Math.pow(vel, 2)));
-
   }
 
   // Called once the command ends or is interrupted.

@@ -24,7 +24,6 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-
   
 
   /**
@@ -103,6 +102,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+
     SmartDashboard.putNumber("Current Gear", RobotContainer.driveSub.getCurrentGear());
     SmartDashboard.putNumber("Rotation Speed of Wheel", RobotContainer.driveSub.getRotationSpeed(RobotContainer.driveSub.getCurrentGear()));
     SmartDashboard.putNumber("RPM limit gear one", DriveSub.limitRotSpdGear1);
@@ -115,6 +115,8 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+
+
   }
 
   /**
