@@ -52,19 +52,6 @@ public static void init() {
 
 }
 
-if (ColorMatcher.color == kBlueTarget) {
-    <StringName> = "Blue";
-  } else if (<ColorMatcher>.color == kRedTarget) {
-    <StringName> = "Red";
-  } else if (<ColorMatcher>.color == kGreenTarget) {
-    <StringName> = "Green";
-  } else if (<ColorMatcher>.color == kYellowTarget) {
-    <StringName> = "Yellow";
-  } else {
-    <StringName> = "Unknown";
-  }
-
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -75,6 +62,7 @@ if (ColorMatcher.color == kBlueTarget) {
  * It is advised to statically import this class (or one of its inner classes)
  * wherever the constants are needed, to reduce verbosity.
  */
+ 
 public final class Constants {
 
     public static WPI_TalonSRX basicMotor = new WPI_TalonSRX(0);
@@ -90,6 +78,7 @@ public final class Constants {
     public static DifferentialDrive drivetrain  = new DifferentialDrive(left, right):
 
     Joystick joystick  = new Joystick(0); 
+    
     // public static final AnalogInput enc = new AnalogInput(0);
     // public static final AnalogEncoder encode = new AnalogEncoder(enc);
     
