@@ -38,7 +38,7 @@ public class PIDCommand extends CommandBase {
 
     double output = pidController.calculate(DriveSub.l2.getSensorCollection().getQuadraturePosition(), driveSetpoint);
 
-    RobotContainer.driveSub.drive(-output, 0);
+    RobotContainer.driveSub.drive(output, 0);
     // System.out.println("PID out put  " + -output + Constants.pidarmStall*Math.sin(enc));
 
     // System.out.println("ARM ENCODER" + Constants.armRight.getSensorCollection().getQuadraturePosition());
