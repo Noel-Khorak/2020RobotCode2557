@@ -47,3 +47,26 @@ public class CountChar {
         System.out.println(count(str, c)); 
     } 
 } 
+
+// PID controller
+public class PIDCommand extends CommandBase {
+    PIDController pidController;
+    boolean done = false; 
+    double factor = 0.000001;
+    double driveSetPoint;
+
+    public PIDCommand(double driveSetpoint) {
+            this.driveSetpoint = driveSetpoint;
+            addRequirements(RobotContainer.driveSub);
+    }
+
+    @override
+    public void initialize() {
+        pidController = new PIDController(0.3, 0, 0);
+        pidController.disableContinuousInput();
+        pidController.setTolerance(10000);
+        pidController.reset();
+    }
+
+    double output = pidController.calculate(l2.getSensor().getQuadraturePosition(), driveSetpoint);
+}
