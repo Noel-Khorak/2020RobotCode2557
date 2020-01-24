@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSub;
@@ -26,9 +27,9 @@ public class PIDCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    pidController = new PIDController(0.0003, 0, 0);
+    pidController = new PIDController(0.00001, 0, 0);
     pidController.disableContinuousInput();
-    pidController.setTolerance(50);
+    pidController.setTolerance(10000);
     pidController.reset();
   }
 
@@ -36,9 +37,11 @@ public class PIDCommand extends CommandBase {
   @Override
   public void execute() {
 
-    double output = pidController.calculate(DriveSub.l2.getSensorCollection().getQuadraturePosition(), driveSetpoint);
+    double output = pidController.calculate(-DriveSub.l2.getSensorCollection().getQuadraturePosition(), driveSetpoint);
 
+    SmartDashboard.putNumber("l2 id s number", DriveSub.l2.getSensorCollection().getQuadraturePosition());
     RobotContainer.driveSub.drive(output, 0);
+    SmartDashboard.putBoolean("is finished", pidController.atSetpoint());
     // System.out.println("PID out put  " + -output + Constants.pidarmStall*Math.sin(enc));
 
     // System.out.println("ARM ENCODER" + Constants.armRight.getSensorCollection().getQuadraturePosition());

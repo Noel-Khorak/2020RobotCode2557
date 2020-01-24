@@ -35,7 +35,7 @@ public class RobotContainer {
   public static final AutoDriveTurn autoDriveTurn = new AutoDriveTurn(30, driveSub);
   public static final ZigZagDrive zigZagDrive = new ZigZagDrive();
 
-  public static final PIDCommand pidCommand = new PIDCommand(500);
+  public static final PIDCommand pidCommand = new PIDCommand(5000);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.

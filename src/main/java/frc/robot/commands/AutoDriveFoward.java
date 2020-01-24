@@ -26,6 +26,7 @@ public class AutoDriveFoward extends CommandBase {
   public AutoDriveFoward(final double distance, final DriveSub subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.distance = distance;
+    addRequirements(subsystem);
   }
 
   public AutoDriveFoward(final double distance) {

@@ -27,8 +27,10 @@ public class DriveSub extends SubsystemBase {
   public static final WPI_TalonSRX r2 = new WPI_TalonSRX(2);
   public static final WPI_TalonSRX l1 = new WPI_TalonSRX(1);
   public final static WPI_TalonSRX l2 = new WPI_TalonSRX(0);
+
   public static final SpeedControllerGroup l = new SpeedControllerGroup(l1, l2);
   public static final SpeedControllerGroup r = new SpeedControllerGroup(r1, r2);
+  
   public final DifferentialDrive driveTrain = new DifferentialDrive(l, r);
 
   public static final AHRS navx = new AHRS(SPI.Port.kMXP);
