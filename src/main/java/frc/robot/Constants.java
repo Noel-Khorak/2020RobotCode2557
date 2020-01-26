@@ -81,6 +81,4 @@ public final class Constants {
     
     // public static final AnalogInput enc = new AnalogInput(0);
     // public static final AnalogEncoder encode = new AnalogEncoder(enc);
-    
-    
 }
